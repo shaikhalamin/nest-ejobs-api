@@ -1,0 +1,58 @@
+version: '3'
+
+services:
+  nest_microservice_kafka_producer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: yarn start:dev
+    container_name: nest_kafka_producer
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - '8070:3000'
+    depends_on:
+      - nest_db_kafka
+      - broker
+    environment:
+      DB_URL: mysql://nest_app_user:12345678@nest_db_kafka_container:3306/nest_microservice_kafkadb_ejobs
+  
+  nest_db_kafka:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: nest_microservice_kafkadb_ejobs
+      MYSQL_USER: nest_app_user
+      MYSQL_PASSWORD: 12345678
+    container_name: nest_db_kafka_container
+    ports:
+      - '3378:3306'
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:6.1.1
+    hostname: zookeeper
+    container_name: zookeeper
+    ports:
+      - '2181:2181'
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  broker:
+    image: confluentinc/cp-server:6.1.1
+    depends_on:
+      - zookeeper
+    ports:
+      - '29092:29092'
+      - '9092:9092'
+    expose:
+      - '29092'
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_DELETE_TOPIC_ENABLE: 'true'
+
