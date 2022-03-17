@@ -44,6 +44,45 @@ export class DataAcquisitionService {
       //   url: item.querySelector('a').href,
       // }));
 
+      //working data fetching code from ejobs
+
+      // const jobNodeList = document.querySelectorAll(".JobList__List li .JCContent");
+
+      // const data = Array.from(jobNodeList).map((item) => {
+      //   const topContentNode = item.querySelector(".JCContentTop");
+      //   let date = topContentNode?.querySelector(".JCContentTop__Date")?.innerText;
+
+      //   const middleContentNode = item.querySelector(".JCContentMiddle");
+      //   const jobTitleNode = middleContentNode?.querySelector(
+      //     ".JCContentMiddle__Title"
+      //   );
+      //   const jobTitleAnchorNode = jobTitleNode?.querySelector("a");
+      //   const jobTitle = jobTitleAnchorNode?.querySelector("span")?.innerText;
+
+      //   const companyNameNode = middleContentNode?.querySelector("h3");
+      //   const companyName = companyNameNode?.querySelector("a")?.innerText;
+
+      //   const salary = middleContentNode?.querySelector(
+      //     "div.JCContentMiddle__Info"
+      //   )?.innerText;
+
+      //   const jobLocation = middleContentNode?.querySelector(
+      //     "span.JCContentMiddle__Info"
+      //   )?.innerText;
+
+      //   const logoContentNode = item.querySelector("a.JCContent__Logo");
+      //   const imageLink = logoContentNode?.querySelector("img")?.src;
+
+      //   return {
+      //     job_title: jobTitle,
+      //     company_name: companyName,
+      //     salary: salary ? salary : "",
+      //     job_location: jobLocation ? jobLocation : "",
+      //     image_link: imageLink,
+      //     created_date: date,
+      //   };
+      // });
+
       console.log('category list', category);
     } catch (error) {
       console.log('error', error);
