@@ -1,18 +1,9 @@
-import {
-  Column,
-  Entity,
-  Index,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { BaseEntity } from '@/common/entity/base.entity';
+import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
 import { JobSeekerProfile } from './job-seeker-profile.entity';
 
 @Entity('experiences')
-export class Experience {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Experience extends BaseEntity {
   @Column({ nullable: true })
   company_name: string;
 

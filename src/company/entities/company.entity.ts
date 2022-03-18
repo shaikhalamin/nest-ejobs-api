@@ -1,16 +1,8 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { BaseEntity } from '@/common/entity/base.entity';
+import { Column, Entity } from 'typeorm';
 
 @Entity('companies')
-export class Company {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Company extends BaseEntity {
   @Column({ nullable: false, length: 30 })
   company_name: string;
 
@@ -46,10 +38,4 @@ export class Company {
 
   @Column({ nullable: false, length: 50 })
   company_country: string;
-
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
 }

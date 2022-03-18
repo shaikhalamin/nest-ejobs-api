@@ -16,6 +16,16 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@/auth/*": ["src/auth/*"],
+      "@/common/*": ["src/common/*"],
+      "@/company/*": ["src/company/*"],
+      "@/data-acquisition/*": ["src/data-acquisition/*"],
+      "@/jobs-circular/*": ["src/jobs-circular/*"],
+      "@/ message-queue/*": ["src/jobs-circular/*"],
+      "@/profile/*": ["src/profile/*"],
+      "@/user/*": ["src/user/*"]
+    }
   }
 }

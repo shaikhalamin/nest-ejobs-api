@@ -1,16 +1,8 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { BaseEntity } from '@/common/entity/base.entity';
+import { Column, Entity } from 'typeorm';
 
 @Entity('job_circulars')
-export class JobCircular {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class JobCircular extends BaseEntity {
   @Column({ nullable: false })
   job_title: string;
 
@@ -64,10 +56,4 @@ export class JobCircular {
 
   @Column({ nullable: false })
   updated_by: string; // should step a relation
-
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
 }

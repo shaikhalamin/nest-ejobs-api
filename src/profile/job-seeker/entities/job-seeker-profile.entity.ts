@@ -1,19 +1,10 @@
-import { User } from '../../../user/entities/user.entity';
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToMany,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { BaseEntity } from '@/common/entity/base.entity';
+import { User } from '@/user/entities/user.entity';
+import { Column, Entity, JoinColumn, OneToMany, OneToOne } from 'typeorm';
 import { Experience } from './job-seeker.experience.entity';
 
 @Entity('job_seeker_profiles')
-export class JobSeekerProfile {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class JobSeekerProfile extends BaseEntity {
   @Column({ nullable: true })
   full_name: string;
 

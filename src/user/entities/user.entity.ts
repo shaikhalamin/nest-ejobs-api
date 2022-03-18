@@ -1,18 +1,8 @@
-import { JobSeekerProfile } from 'src/profile/job-seeker/entities/job-seeker-profile.entity';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  OneToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
-
+import { Column, Entity, OneToOne } from 'typeorm';
+import { BaseEntity } from '@/common/entity/base.entity';
+import { JobSeekerProfile } from '@/profile/job-seeker/entities/job-seeker-profile.entity';
 @Entity('users')
-export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class User extends BaseEntity {
   @Column({ nullable: false, length: 100 })
   first_name: string;
 
@@ -39,10 +29,4 @@ export class User {
 
   @OneToOne(() => JobSeekerProfile, (jobSeekerProfile) => jobSeekerProfile.user)
   jobSeekerProfile: JobSeekerProfile;
-
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
 }
