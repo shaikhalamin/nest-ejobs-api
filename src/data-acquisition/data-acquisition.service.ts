@@ -6,7 +6,7 @@ import { PuppeteerService } from 'src/common/crawler/puppeteer/puppeteer.service
 export class DataAcquisitionService {
   constructor(private readonly puppeteerService: PuppeteerService) {}
 
-  @Cron(CronExpression.EVERY_MINUTE)
+  @Cron(CronExpression.EVERY_12_HOURS)
   async fetchData() {
     try {
       console.log('Data fetching started at ', new Date().toISOString());

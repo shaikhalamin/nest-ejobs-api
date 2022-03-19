@@ -2,12 +2,12 @@ import { IsNotEmpty } from 'class-validator';
 import { Exclude, Expose } from 'class-transformer';
 
 @Exclude()
-export class CreateTagDto {
+export class CreateJobLocationDto {
   @Expose()
   @IsNotEmpty()
-  name: string;
+  title: string;
 
   @Expose()
   @IsNotEmpty()
-  slug: string;
+  alias: string;
 }

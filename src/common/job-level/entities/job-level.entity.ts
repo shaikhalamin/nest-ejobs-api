@@ -1,11 +1,15 @@
 import { BaseEntity } from '@/common/entity/base.entity';
-import { Column, Entity } from 'typeorm';
+import { JobCircular } from '@/jobs-circular/entities/job-circular.entity';
+import { Column, Entity, OneToOne } from 'typeorm';
 
 @Entity('job_levels')
 export class JobLevel extends BaseEntity {
   @Column({ nullable: false, length: 30 })
-  text: string;
+  title: string;
 
   @Column({ nullable: false, length: 30 })
-  value: string;
+  alias: string;
+
+  @OneToOne(() => JobCircular, (jobCircular) => jobCircular.jobLevel)
+  jobCircular: JobCircular;
 }

@@ -1,19 +1,24 @@
 import { BaseEntity } from '@/common/entity/base.entity';
-import { Column, Entity } from 'typeorm';
+import { JobIndustry } from '@/common/job-industry/entities/job-industry.entity';
+import { JobLevel } from '@/common/job-level/entities/job-level.entity';
+import { JobLocation } from '@/common/job-location/entities/job-location.entity';
+import { JobType } from '@/common/job-type/entities/job-type.entity';
+import { User } from '@/user/entities/user.entity';
+import { Column, Entity, OneToMany, OneToOne } from 'typeorm';
 
 @Entity('job_circulars')
 export class JobCircular extends BaseEntity {
   @Column({ nullable: false })
-  job_title: string;
+  title: string;
 
-  @Column({ nullable: false })
-  job_type: string; // should step a relation
+  @OneToOne(() => JobType, (jobType) => jobType.jobCircular)
+  jobType: JobType;
 
-  @Column({ nullable: false })
-  job_category: string; // should step a relation
+  @OneToOne(() => JobIndustry, (jobIndustry) => jobIndustry.jobCircular)
+  jobIndustry: JobIndustry;
 
-  @Column({ nullable: false })
-  job_level: string; // should step a relation
+  @OneToOne(() => JobLevel, (jobLevel) => jobLevel.jobCircular)
+  jobLevel: JobLevel;
 
   @Column({ nullable: false })
   no_of_positions: number;
@@ -27,8 +32,8 @@ export class JobCircular extends BaseEntity {
   @Column({ nullable: false })
   language_proficiency: string;
 
-  @Column({ nullable: false })
-  city: string;
+  @OneToMany(() => JobLocation, (jobLocation) => jobLocation.jobCircular)
+  jobLocations: JobLocation[];
 
   @Column({ nullable: false })
   country: string;
@@ -51,9 +56,9 @@ export class JobCircular extends BaseEntity {
   @Column({ nullable: false, type: 'text' })
   job_benefits: string;
 
-  @Column({ nullable: false })
-  created_by: string; // should step a relation
+  @OneToOne(() => User, (user) => user.jobCircularCreatedBy)
+  createdBy: User;
 
-  @Column({ nullable: false })
-  updated_by: string; // should step a relation
+  @OneToOne(() => User, (user) => user.jobCircularUpdatedBy)
+  UpdatedBy: User;
 }
