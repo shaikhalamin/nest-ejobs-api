@@ -1,6 +1,6 @@
 import { BaseEntity } from '@/common/entity/base.entity';
-import { JobCircular } from '@/jobs-circular/entities/job-circular.entity';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { JobCircularJobLocation } from '@/jobs-circular/entities/job-circular-job-location.entity';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity('job_locations')
 export class JobLocation extends BaseEntity {
@@ -10,6 +10,9 @@ export class JobLocation extends BaseEntity {
   @Column({ nullable: false, length: 30 })
   alias: string;
 
-  @ManyToOne(() => JobCircular, (jobCircular) => jobCircular.jobLocations)
-  jobCircular: JobCircular;
+  @OneToMany(
+    () => JobCircularJobLocation,
+    (jobCircularJobLocation) => jobCircularJobLocation.jobLocation,
+  )
+  jobCircularJobLocation: JobCircularJobLocation[];
 }

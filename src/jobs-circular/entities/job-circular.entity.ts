@@ -1,10 +1,11 @@
 import { BaseEntity } from '@/common/entity/base.entity';
 import { JobIndustry } from '@/common/job-industry/entities/job-industry.entity';
 import { JobLevel } from '@/common/job-level/entities/job-level.entity';
-import { JobLocation } from '@/common/job-location/entities/job-location.entity';
 import { JobType } from '@/common/job-type/entities/job-type.entity';
 import { User } from '@/user/entities/user.entity';
-import { Column, Entity, OneToMany, OneToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToMany, OneToOne } from 'typeorm';
+import { JobCircularJobLocation } from './job-circular-job-location.entity';
+import { JobCircularTag } from './job-circular-tags.entity';
 
 @Entity('job_circulars')
 export class JobCircular extends BaseEntity {
@@ -12,12 +13,15 @@ export class JobCircular extends BaseEntity {
   title: string;
 
   @OneToOne(() => JobType, (jobType) => jobType.jobCircular)
+  @JoinColumn()
   jobType: JobType;
 
   @OneToOne(() => JobIndustry, (jobIndustry) => jobIndustry.jobCircular)
+  @JoinColumn()
   jobIndustry: JobIndustry;
 
   @OneToOne(() => JobLevel, (jobLevel) => jobLevel.jobCircular)
+  @JoinColumn()
   jobLevel: JobLevel;
 
   @Column({ nullable: false })
@@ -32,8 +36,11 @@ export class JobCircular extends BaseEntity {
   @Column({ nullable: false })
   language_proficiency: string;
 
-  @OneToMany(() => JobLocation, (jobLocation) => jobLocation.jobCircular)
-  jobLocations: JobLocation[];
+  @OneToMany(
+    () => JobCircularJobLocation,
+    (jobCircularJobLocation) => jobCircularJobLocation.jobCircular,
+  )
+  jobCircularJobLocations: JobCircularJobLocation[];
 
   @Column({ nullable: false })
   country: string;
@@ -44,8 +51,11 @@ export class JobCircular extends BaseEntity {
   @Column({ nullable: false, type: 'boolean' })
   is_verified: number;
 
-  @Column({ nullable: true })
-  tags: string; // should step a relation
+  @OneToMany(
+    () => JobCircularTag,
+    (jobCircularTag) => jobCircularTag.jobCircular,
+  )
+  jobCircularTags: JobCircularTag[];
 
   @Column({ nullable: false, type: 'text' })
   ideal_candidate: string;
@@ -57,8 +67,10 @@ export class JobCircular extends BaseEntity {
   job_benefits: string;
 
   @OneToOne(() => User, (user) => user.jobCircularCreatedBy)
+  @JoinColumn()
   createdBy: User;
 
   @OneToOne(() => User, (user) => user.jobCircularUpdatedBy)
-  UpdatedBy: User;
+  @JoinColumn()
+  updatedBy: User;
 }

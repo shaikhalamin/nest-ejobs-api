@@ -18,6 +18,7 @@ import { DataAcquisitionModule } from './data-acquisition/data-acquisition.modul
 import { ScheduleModule } from '@nestjs/schedule';
 import { JobIndustryModule } from './common/job-industry/job-industry.module';
 import { JobLocationModule } from './common/job-location/job-location.module';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 const mySQLUrl = process.env.DB_URL
   ? process.env.DB_URL
@@ -31,6 +32,7 @@ const driverType = 'mysql';
       url: mySQLUrl,
       entities: [`${__dirname}/**/entities/*.{ts,js}`],
       synchronize: true,
+      namingStrategy: new SnakeNamingStrategy(),
     }),
     ScheduleModule.forRoot(),
     JobsCircularModule,

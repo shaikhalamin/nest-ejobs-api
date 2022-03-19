@@ -34,6 +34,6 @@ export class User extends BaseEntity {
   @OneToOne(() => JobCircular, (jobCircular) => jobCircular.createdBy)
   jobCircularCreatedBy: JobCircular;
 
-  @OneToOne(() => JobCircular, (jobCircular) => jobCircular.UpdatedBy)
+  @OneToOne(() => JobCircular, (jobCircular) => jobCircular.updatedBy)
   jobCircularUpdatedBy: JobCircular;
 }
