@@ -6,37 +6,49 @@ import {
   Patch,
   Param,
   Delete,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { ControllerInterface } from 'src/shared/interfaces/controller.interface';
+import { UserResponse } from './dto/response-user.dto';
+import { plainToInstance } from 'class-transformer';
 
 @Controller('user')
-export class UserController {
+export class UserController implements ControllerInterface {
   constructor(private readonly userService: UserService) {}
-
-  @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+  @Get()
+  async findAll(): Promise<UserResponse[]> {
+    return await this.userService.findAll();
   }
 
-  @Get()
-  findAll() {
-    return this.userService.findAll();
+  @Post()
+  @UsePipes(new ValidationPipe())
+  async create(@Body() body: CreateUserDto): Promise<UserResponse> {
+    return plainToInstance(UserResponse, await this.userService.create(body));
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+  async findOne(id: string): Promise<UserResponse> {
+    return plainToInstance(UserResponse, await this.userService.findOne(+id));
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
+  async update(
+    id: string,
+    @Body() body?: UpdateUserDto,
+    req?: any,
+  ): Promise<UserResponse> {
+    return plainToInstance(
+      UserResponse,
+      await this.userService.update(+id, body),
+    );
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+  remove(id: string, req?: any): Promise<any> {
+    throw new Error('Method not implemented.');
   }
 }

@@ -4,6 +4,6 @@ import { JobIndustryController } from './job-industry.controller';
 
 @Module({
   controllers: [JobIndustryController],
-  providers: [JobIndustryService]
+  providers: [JobIndustryService],
 })
 export class JobIndustryModule {}

@@ -4,6 +4,6 @@ import { JobLocationController } from './job-location.controller';
 
 @Module({
   controllers: [JobLocationController],
-  providers: [JobLocationService]
+  providers: [JobLocationService],
 })
 export class JobLocationModule {}

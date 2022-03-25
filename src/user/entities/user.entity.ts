@@ -1,7 +1,8 @@
-import { Column, Entity, OneToOne } from 'typeorm';
+import { BeforeInsert, Column, Entity, OneToOne } from 'typeorm';
 import { BaseEntity } from '@/common/entity/base.entity';
 import { JobSeekerProfile } from '@/profile/job-seeker/entities/job-seeker-profile.entity';
 import { JobCircular } from '@/jobs-circular/entities/job-circular.entity';
+import * as bcrypt from 'bcrypt';
 @Entity('users')
 export class User extends BaseEntity {
   @Column({ nullable: false, length: 100 })
@@ -36,4 +37,14 @@ export class User extends BaseEntity {
 
   @OneToOne(() => JobCircular, (jobCircular) => jobCircular.updatedBy)
   jobCircularUpdatedBy: JobCircular;
+
+  @BeforeInsert()
+  async hashPassword() {
+    const salt = bcrypt.genSaltSync(10);
+    this.password = bcrypt.hashSync(this.password, salt);
+  }
+
+  async validatePassword(password: string): Promise<boolean> {
+    return await bcrypt.compare(password, this.password);
+  }
 }
