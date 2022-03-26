@@ -26,7 +26,7 @@ export class PuppeteerService {
       timeout: 0,
     });
     //await page.screenshot({ path: 'screenshot.png' });
-    //await this.crawler.close();
+    // await this.crawler.close();
     return page;
   }
   public async close() {
