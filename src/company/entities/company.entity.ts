@@ -1,5 +1,6 @@
 import { BaseEntity } from '@/common/entity/base.entity';
-import { Column, Entity } from 'typeorm';
+import { JobCircular } from '@/jobs-circular/entities/job-circular.entity';
+import { Column, Entity, OneToOne } from 'typeorm';
 
 @Entity('companies')
 export class Company extends BaseEntity {
@@ -9,33 +10,36 @@ export class Company extends BaseEntity {
   @Column({ nullable: false, length: 30 })
   company_logo: string;
 
-  @Column({ nullable: false, length: 30 })
-  company_type: string; //should setup relation with job-category
+  @Column({ nullable: true, length: 30 })
+  company_type: string;
 
-  @Column({ nullable: false, length: 20 })
+  @Column({ nullable: true, length: 20 })
   company_mobile: string;
 
-  @Column({ nullable: false, length: 20 })
+  @Column({ nullable: true, length: 20 })
   company_telephone: string;
 
-  @Column({ nullable: false, length: 20 })
+  @Column({ nullable: true, length: 20 })
   company_fax: string;
 
-  @Column({ nullable: false, length: 150 })
+  @Column({ nullable: true, length: 150 })
   company_url: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: true })
   no_of_employees: number;
 
-  @Column({ nullable: false, type: 'text' })
+  @Column({ nullable: true, type: 'text' })
   company_motivation: string;
 
-  @Column({ nullable: false, type: 'text' })
+  @Column({ nullable: true, type: 'text' })
   company_address: string;
 
-  @Column({ nullable: false, length: 50 })
+  @Column({ nullable: true, length: 50 })
   company_city: string;
 
-  @Column({ nullable: false, length: 50 })
+  @Column({ nullable: true, length: 50 })
   company_country: string;
+
+  @OneToOne(() => JobCircular, (jobCircular) => jobCircular.company)
+  jobCircular: JobCircular;
 }

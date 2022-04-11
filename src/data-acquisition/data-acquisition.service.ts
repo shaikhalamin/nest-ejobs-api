@@ -6,7 +6,7 @@ import { PuppeteerService } from 'src/common/crawler/puppeteer/puppeteer.service
 export class DataAcquisitionService {
   constructor(private readonly puppeteerService: PuppeteerService) {}
 
-  // @Cron(CronExpression.EVERY_1ST_DAY_OF_MONTH_AT_MIDNIGHT)
+  // @Cron(CronExpression.EVERY_MINUTE)
   async fetchData() {
     try {
       console.log('Data fetching started at ', new Date().toISOString());
@@ -83,7 +83,7 @@ export class DataAcquisitionService {
       //   };
       // });
 
-      console.log('category list', category);
+      console.log('category list', category.length, category);
     } catch (error) {
       console.log('error', error);
       await this.puppeteerService.close();
@@ -93,7 +93,7 @@ export class DataAcquisitionService {
     }
   }
 
-  @Cron(CronExpression.EVERY_MINUTE)
+  // @Cron(CronExpression.EVERY_MINUTE)
   async fetchJobCategory() {
     try {
       console.log('Data fetching started at ', new Date().toISOString());
@@ -171,7 +171,7 @@ export class DataAcquisitionService {
     try {
       console.log('Data fetching started at ', new Date().toISOString());
       const page = await this.puppeteerService.open(
-        'https://www.ejobs.ro/en/user/jobs/office-manager/1514977',
+        'https://www.ejobs.ro/en/user/jobs/workforce-management-analyst/1522127',
       );
 
       const jobDetails = await page.evaluate(() => {
@@ -225,6 +225,9 @@ export class DataAcquisitionService {
                 const keyName =
                   keyNameNode instanceof HTMLElement
                     ? keyNameNode.innerText
+                        .replace(/\r?\n?/g, '')
+                        .split(' ')
+                        .join('')
                     : '';
                 const value =
                   valueNode instanceof HTMLElement
