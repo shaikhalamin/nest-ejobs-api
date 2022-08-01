@@ -1,77 +1,133 @@
 import { Exclude, Expose } from 'class-transformer';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 
 @Exclude()
 export class CreateJobsCircularDto {
   @Expose()
   @IsNotEmpty()
-  job_title: string;
+  title: string;
 
   @Expose()
+  @IsOptional()
   @IsNotEmpty()
-  job_type: string;
+  noOfPositions: number;
 
   @Expose()
-  @IsNotEmpty()
-  job_category: string;
-
-  @Expose()
-  @IsNotEmpty()
-  job_level: string;
-
-  @Expose()
-  @IsNotEmpty()
-  no_of_positions: number;
-
-  @Expose()
+  @IsOptional()
   @IsNotEmpty()
   salary: string;
 
   @Expose()
+  @IsOptional()
   @IsNotEmpty()
-  education_qualification: string;
-
-  @Expose()
-  @IsNotEmpty()
-  language_proficiency: string;
-
-  @Expose()
-  @IsNotEmpty()
-  city: string;
+  languageProficiency: string;
 
   @Expose()
   @IsNotEmpty()
   country: string;
 
   @Expose()
+  @IsOptional()
   @IsNotEmpty()
-  company: string;
+  age: string;
 
   @Expose()
+  @IsOptional()
   @IsNotEmpty()
-  is_verified: number;
+  isVerified: boolean;
 
   @Expose()
+  @IsOptional()
   @IsNotEmpty()
-  tags: string;
+  isPublished: boolean;
 
   @Expose()
+  @IsOptional()
   @IsNotEmpty()
-  ideal_candidate: string;
+  isFeatured: number;
 
+  // status (draft, active, closed, expired)
   @Expose()
   @IsNotEmpty()
-  job_description: string;
+  status: string;
 
   @Expose()
+  @IsOptional()
   @IsNotEmpty()
-  job_benefits: string;
+  jobResponsibilities: string;
 
   @Expose()
+  @IsOptional()
   @IsNotEmpty()
-  created_by: string;
+  educationRequirements: string;
 
   @Expose()
+  @IsOptional()
   @IsNotEmpty()
-  updated_by: string;
+  experienceRequirements: string;
+
+  @Expose()
+  @IsOptional()
+  @IsNotEmpty()
+  additionalRequirements: string;
+
+  @Expose()
+  @IsOptional()
+  @IsNotEmpty()
+  compensationsJobBenefits: string;
+
+  @Expose()
+  @IsOptional()
+  @IsNotEmpty()
+  applicationDeadline: Date;
+
+  @Expose()
+  @IsOptional()
+  @IsNotEmpty()
+  publishedDate: Date;
+
+  @Expose()
+  @IsOptional()
+  @IsNotEmpty()
+  jobVideoLink: string;
+
+  @Expose()
+  @IsOptional()
+  @IsNotEmpty()
+  jobAttachmentLink: string;
+
+  // employment type (full time, part time, contract, internship, temporary)
+  @Expose()
+  @IsOptional()
+  @IsNotEmpty()
+  employmentType: number;
+
+  @Expose()
+  @IsOptional()
+  @IsNotEmpty()
+  company: number;
+
+  // job tags (IT, Engineering, Management, etc)
+  @Expose()
+  @IsOptional()
+  @IsNotEmpty()
+  tags: number[];
+
+  // job location (city, country)
+  @Expose()
+  @IsOptional()
+  @IsNotEmpty()
+  jobLocations: number[];
+
+  // job industry (IT, Engineering, Management, etc)
+  @Expose()
+  @IsOptional()
+  @IsNotEmpty()
+  jobIndustry: number;
+
+  // career level (entry level, mid level, senior level)
+  @Expose()
+  @IsOptional()
+  @IsNotEmpty()
+  jobLevel: number;
 }

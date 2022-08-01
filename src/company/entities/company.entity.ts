@@ -5,40 +5,43 @@ import { Column, Entity, OneToOne } from 'typeorm';
 @Entity('companies')
 export class Company extends BaseEntity {
   @Column({ nullable: false, length: 30 })
-  company_name: string;
+  companyName: string;
 
   @Column({ nullable: false, length: 30 })
-  company_logo: string;
+  companyEmail: string;
 
   @Column({ nullable: true, length: 30 })
-  company_type: string;
+  companyLogo: string;
+
+  @Column({ nullable: true, length: 30 })
+  companyType: string;
+
+  @Column({ nullable: false, length: 20 })
+  companyMobile: string;
 
   @Column({ nullable: true, length: 20 })
-  company_mobile: string;
+  companyTelephone: string;
 
   @Column({ nullable: true, length: 20 })
-  company_telephone: string;
-
-  @Column({ nullable: true, length: 20 })
-  company_fax: string;
+  companyFax: string;
 
   @Column({ nullable: true, length: 150 })
-  company_url: string;
+  companyUrl: string;
 
   @Column({ nullable: true })
-  no_of_employees: number;
+  noOfEmployees: number;
 
   @Column({ nullable: true, type: 'text' })
-  company_motivation: string;
+  companyMotivation: string;
 
-  @Column({ nullable: true, type: 'text' })
-  company_address: string;
-
-  @Column({ nullable: true, length: 50 })
-  company_city: string;
+  @Column({ nullable: false, type: 'text' })
+  companyAddress: string;
 
   @Column({ nullable: true, length: 50 })
-  company_country: string;
+  companyCity: string;
+
+  @Column({ nullable: true, length: 50 })
+  companyCountry: string;
 
   @OneToOne(() => JobCircular, (jobCircular) => jobCircular.company)
   jobCircular: JobCircular;

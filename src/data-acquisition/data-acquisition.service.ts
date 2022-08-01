@@ -166,7 +166,7 @@ export class DataAcquisitionService {
     }
   }
 
-  // @Cron(CronExpression.EVERY_MINUTE)
+  // @Cron(CronExpression.EVERY_10_SECONDS)
   async fetchJobDetails() {
     try {
       console.log('Data fetching started at ', new Date().toISOString());
