@@ -22,7 +22,7 @@ import { EmploymentTypeModule } from './common/employment-type/employment-type.m
 
 const mySQLUrl = process.env.DB_URL
   ? process.env.DB_URL
-  : 'mysql://root:12345678@localhost:3306/nest_ejobs';
+  : 'mysql://root:12345678@localhost:3378/nest_ejobs';
 const driverType = 'mysql';
 
 @Module({

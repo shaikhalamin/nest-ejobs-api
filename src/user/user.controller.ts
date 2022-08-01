@@ -16,7 +16,7 @@ import { ControllerInterface } from 'src/shared/interfaces/controller.interface'
 import { UserResponse } from './dto/response-user.dto';
 import { plainToInstance } from 'class-transformer';
 
-@Controller('user')
+@Controller('users')
 export class UserController implements ControllerInterface {
   constructor(private readonly userService: UserService) {}
   @Get()

@@ -15,7 +15,7 @@ RUN yarn add puppeteer@10.0.0
      
 COPY package*.json yarn.lock ./
 RUN yarn cache clean
-RUN yarn install --ignore-engines
+RUN yarn install
 
 COPY . .
 
