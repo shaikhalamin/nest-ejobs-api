@@ -6,16 +6,19 @@ import {
   Patch,
   Param,
   Delete,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { JobsCircularService } from './jobs-circular.service';
 import { CreateJobsCircularDto } from './dto/create-jobs-circular.dto';
 import { UpdateJobsCircularDto } from './dto/update-jobs-circular.dto';
 
-@Controller('jobs-circular')
+@Controller('jobs-circulars')
 export class JobsCircularController {
   constructor(private readonly jobsCircularService: JobsCircularService) {}
 
   @Post()
+  @UsePipes(new ValidationPipe())
   create(@Body() createJobsCircularDto: CreateJobsCircularDto) {
     return this.jobsCircularService.create(createJobsCircularDto);
   }

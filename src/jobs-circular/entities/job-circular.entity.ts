@@ -13,64 +13,68 @@ export class JobCircular extends BaseEntity {
   @Column({ nullable: false })
   title: string;
 
-  @Column({ nullable: false })
-  no_of_positions: number;
+  @Column({ nullable: true })
+  noOfPositions: number;
 
-  @Column({ nullable: false })
+  @Column({ nullable: true })
   salary: string;
 
-  @Column({ nullable: false })
-  language_proficiency: string;
+  @Column({ nullable: true })
+  languageProficiency: string;
 
   @Column({ nullable: false })
   country: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: true, default: 'N/A' })
   age: string;
 
-  @Column({ nullable: false, type: 'boolean', default: false })
-  is_verified: number;
+  @Column({ nullable: true, type: 'boolean', default: false })
+  isVerified: boolean;
 
-  @Column({ nullable: false, type: 'boolean', default: false })
-  is_published: number;
+  @Column({ nullable: true, type: 'boolean', default: false })
+  isPublished: boolean;
 
-  @Column({ nullable: false, type: 'boolean', default: false })
-  is_featured: number;
+  @Column({ nullable: true, type: 'boolean', default: false })
+  isFeatured: boolean;
 
-  // status (open, closed, expired)
+  // status (draft, active, closed, expired)
   @Column({ nullable: false })
   status: string;
 
-  @Column({ nullable: false, type: 'text' })
-  job_Responsibilities: string;
+  @Column({ nullable: true, type: 'text' })
+  jobResponsibilities: string;
 
+  @Column({ nullable: true, type: 'text' })
+  educationRequirements: string;
+
+  @Column({ nullable: true, type: 'text' })
+  experienceRequirements: string;
+
+  @Column({ nullable: true, type: 'text' })
+  additionalRequirements: string;
+
+  @Column({ nullable: true, type: 'text' })
+  compensationsJobBenefits: string;
+
+  @Column({ nullable: true, type: 'date' })
+  applicationDeadline: Date;
+
+  @Column({ nullable: true, type: 'datetime' })
+  publishedDate: Date;
+
+  @Column({ nullable: true, type: 'varchar' })
+  jobVideoLink: string;
+
+  @Column({ nullable: true, type: 'varchar' })
+  jobAttachmentLink: string;
+
+  // employment type (full time, part time, contract, internship, temporary)
   @OneToOne(
     () => EmploymentType,
     (employmentType) => employmentType.jobCircular,
   )
   @JoinColumn()
   employmentType: EmploymentType;
-
-  @Column({ nullable: false })
-  education_requirements: string;
-
-  @Column({ nullable: true, type: 'text' })
-  experience_requirements: string;
-
-  @Column({ nullable: true, type: 'text' })
-  additional_requirements: string;
-
-  @Column({ nullable: true, type: 'text' })
-  compensations_job_benefits: string;
-
-  @Column({ nullable: true, type: 'date' })
-  application_deadline: Date;
-
-  @Column({ nullable: true, type: 'datetime' })
-  published_date: Date;
-
-  @Column({ nullable: true, type: 'varchar' })
-  job_video_link: string;
 
   @OneToOne(() => Company, (company) => company.jobCircular)
   @JoinColumn()

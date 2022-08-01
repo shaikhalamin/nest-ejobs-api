@@ -11,4 +11,8 @@ export class AuthController {
   async login(@Body() loginDto: LoginDto): Promise<{ access_token: string }> {
     return await this.authService.login(loginDto);
   }
+  @Post('/logout')
+  async logout(): Promise<void> {
+    console.log('ok');
+  }
 }

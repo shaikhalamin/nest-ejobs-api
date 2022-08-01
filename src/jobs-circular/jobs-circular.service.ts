@@ -6,16 +6,19 @@ import { JobsCircularRepository } from './jobs-circular.repository';
 @Injectable()
 export class JobsCircularService {
   constructor(private readonly jobCircularRepository: JobsCircularRepository) {}
+
   create(createJobsCircularDto: CreateJobsCircularDto) {
-    return 'This action adds a new jobsCircular';
+    return this.jobCircularRepository.addJobCircular(createJobsCircularDto);
   }
 
   findAll() {
-    return this.jobCircularRepository.findAndCount({});
+    return this.jobCircularRepository.findAndCount({
+      relations: ['company'],
+    });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} jobsCircular`;
+    return this.jobCircularRepository.findOneOrFail(id);
   }
 
   update(id: number, updateJobsCircularDto: UpdateJobsCircularDto) {
