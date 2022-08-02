@@ -11,7 +11,7 @@ import { JobIndustryService } from './job-industry.service';
 import { CreateJobIndustryDto } from './dto/create-job-industry.dto';
 import { UpdateJobIndustryDto } from './dto/update-job-industry.dto';
 
-@Controller('job-industry')
+@Controller('job-industries')
 export class JobIndustryController {
   constructor(private readonly jobIndustryService: JobIndustryService) {}
 

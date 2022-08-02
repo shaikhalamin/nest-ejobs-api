@@ -13,7 +13,7 @@ export class JobsCircularService {
 
   findAll() {
     return this.jobCircularRepository.findAndCount({
-      relations: ['company'],
+      relations: ['company', 'employmentType', 'jobIndustry', 'jobLevel'],
     });
   }
 
