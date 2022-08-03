@@ -1,15 +1,21 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { CreateEmploymentTypeDto } from './dto/create-employment-type.dto';
 import { UpdateEmploymentTypeDto } from './dto/update-employment-type.dto';
+import { EmploymentTypeRepository } from './employment-type.respository';
 
 @Injectable()
 export class EmploymentTypeService {
+  constructor(
+    private readonly employmentTypeRepository: EmploymentTypeRepository,
+  ) { }
+
   create(createEmploymentTypeDto: CreateEmploymentTypeDto) {
-    return 'This action adds a new employmentType';
+    return this.employmentTypeRepository.addEmploymentType(createEmploymentTypeDto);
   }
 
   findAll() {
-    return `This action returns all employmentType`;
+    return this.employmentTypeRepository.find();
   }
 
   findOne(id: number) {

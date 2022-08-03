@@ -1,4 +1,11 @@
-import { BeforeInsert, Column, Entity, Index, OneToOne } from 'typeorm';
+import {
+  BeforeInsert,
+  Column,
+  Entity,
+  Index,
+  OneToMany,
+  OneToOne,
+} from 'typeorm';
 import { BaseEntity } from '@/common/entity/base.entity';
 import { JobSeekerProfile } from '@/profile/job-seeker/entities/job-seeker-profile.entity';
 import { JobCircular } from '@/jobs-circular/entities/job-circular.entity';
@@ -34,10 +41,10 @@ export class User extends BaseEntity {
   @OneToOne(() => JobSeekerProfile, (jobSeekerProfile) => jobSeekerProfile.user)
   jobSeekerProfile: JobSeekerProfile;
 
-  @OneToOne(() => JobCircular, (jobCircular) => jobCircular.createdBy)
+  @OneToMany(() => JobCircular, (jobCircular) => jobCircular.createdBy)
   jobCircularCreatedBy: JobCircular;
 
-  @OneToOne(() => JobCircular, (jobCircular) => jobCircular.updatedBy)
+  @OneToMany(() => JobCircular, (jobCircular) => jobCircular.updatedBy)
   jobCircularUpdatedBy: JobCircular;
 
   @BeforeInsert()

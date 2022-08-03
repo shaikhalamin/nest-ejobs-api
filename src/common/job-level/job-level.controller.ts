@@ -1,9 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { JobLevelService } from './job-level.service';
 import { CreateJobLevelDto } from './dto/create-job-level.dto';
 import { UpdateJobLevelDto } from './dto/update-job-level.dto';
 
-@Controller('job-level')
+@Controller('job-levels')
 export class JobLevelController {
   constructor(private readonly jobLevelService: JobLevelService) {}
 
@@ -23,7 +31,10 @@ export class JobLevelController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateJobLevelDto: UpdateJobLevelDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateJobLevelDto: UpdateJobLevelDto,
+  ) {
     return this.jobLevelService.update(+id, updateJobLevelDto);
   }
 

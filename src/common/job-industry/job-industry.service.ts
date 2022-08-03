@@ -1,15 +1,19 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { CreateJobIndustryDto } from './dto/create-job-industry.dto';
 import { UpdateJobIndustryDto } from './dto/update-job-industry.dto';
+import { JobIndustryRepository } from './job-industry.repository';
 
 @Injectable()
 export class JobIndustryService {
+  constructor(private readonly jobIndustryRepository: JobIndustryRepository) { }
+
   create(createJobIndustryDto: CreateJobIndustryDto) {
-    return 'This action adds a new jobIndustry';
+    return this.jobIndustryRepository.addJobIndustry(createJobIndustryDto);
   }
 
   findAll() {
-    return `This action returns all jobIndustry`;
+    return this.jobIndustryRepository.find();
   }
 
   findOne(id: number) {

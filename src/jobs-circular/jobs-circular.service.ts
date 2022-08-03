@@ -13,12 +13,14 @@ export class JobsCircularService {
 
   findAll() {
     return this.jobCircularRepository.findAndCount({
-      relations: ['company'],
+      relations: ['company', 'employmentType', 'jobIndustry', 'jobLevel'],
     });
   }
 
   findOne(id: number) {
-    return this.jobCircularRepository.findOneOrFail(id);
+    return this.jobCircularRepository.findOne(id, {
+      relations: ['company', 'employmentType', 'jobIndustry', 'jobLevel'],
+    });
   }
 
   update(id: number, updateJobsCircularDto: UpdateJobsCircularDto) {
@@ -26,6 +28,6 @@ export class JobsCircularService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} jobsCircular`;
+    return this.jobCircularRepository.delete(+id);
   }
 }
