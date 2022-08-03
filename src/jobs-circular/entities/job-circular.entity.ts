@@ -4,7 +4,7 @@ import { JobIndustry } from '@/common/job-industry/entities/job-industry.entity'
 import { JobLevel } from '@/common/job-level/entities/job-level.entity';
 import { Company } from '@/company/entities/company.entity';
 import { User } from '@/user/entities/user.entity';
-import { Column, Entity, JoinColumn, OneToMany, OneToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { JobCircularJobLocation } from './job-circular-job-location.entity';
 import { JobCircularTag } from './job-circular-tags.entity';
 
@@ -69,14 +69,14 @@ export class JobCircular extends BaseEntity {
   jobAttachmentLink: string;
 
   // employment type (full time, part time, contract, internship, temporary)
-  @OneToOne(
+  @ManyToOne(
     () => EmploymentType,
     (employmentType) => employmentType.jobCircular,
   )
   @JoinColumn()
   employmentType: EmploymentType;
 
-  @OneToOne(() => Company, (company) => company.jobCircular)
+  @ManyToOne(() => Company, (company) => company.jobCircular)
   @JoinColumn()
   company: Company;
 
@@ -95,20 +95,20 @@ export class JobCircular extends BaseEntity {
   jobCircularJobLocations: JobCircularJobLocation[];
 
   // job industry (IT, Engineering, Management, etc)
-  @OneToOne(() => JobIndustry, (jobIndustry) => jobIndustry.jobCircular)
+  @ManyToOne(() => JobIndustry, (jobIndustry) => jobIndustry.jobCircular)
   @JoinColumn()
   jobIndustry: JobIndustry;
 
   // career level (entry level, mid level, senior level)
-  @OneToOne(() => JobLevel, (jobLevel) => jobLevel.jobCircular)
+  @ManyToOne(() => JobLevel, (jobLevel) => jobLevel.jobCircular)
   @JoinColumn()
   jobLevel: JobLevel;
 
-  @OneToOne(() => User, (user) => user.jobCircularCreatedBy)
+  @ManyToOne(() => User, (user) => user.jobCircularCreatedBy)
   @JoinColumn()
   createdBy: User;
 
-  @OneToOne(() => User, (user) => user.jobCircularUpdatedBy)
+  @ManyToOne(() => User, (user) => user.jobCircularUpdatedBy)
   @JoinColumn()
   updatedBy: User;
 }

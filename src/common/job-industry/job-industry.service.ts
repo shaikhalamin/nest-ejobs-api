@@ -13,7 +13,7 @@ export class JobIndustryService {
   }
 
   findAll() {
-    return `This action returns all jobIndustry`;
+    return this.jobIndustryRepository.find();
   }
 
   findOne(id: number) {

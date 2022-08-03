@@ -8,10 +8,16 @@ import {
   Delete,
   UsePipes,
   ValidationPipe,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
 import { CompanyService } from './company.service';
 import { CreateCompanyDto } from './dto/create-company.dto';
 import { UpdateCompanyDto } from './dto/update-company.dto';
+import { extname } from 'path';
+import { Express } from 'express';
 
 @Controller('companies')
 export class CompanyController {
@@ -19,8 +25,24 @@ export class CompanyController {
 
   @Post()
   @UsePipes(new ValidationPipe())
-  create(@Body() createCompanyDto: CreateCompanyDto) {
-    return this.companyService.create(createCompanyDto);
+  @UseInterceptors(
+    FileInterceptor('companyLogo', {
+      storage: diskStorage({
+        destination: './public/uploads',
+        filename: async (req: any, file: Express.Multer.File, cb: any) => {
+          const companyEmail = new String(
+            req.body.companyEmail,
+          ).toLocaleLowerCase();
+          cb(null, `${companyEmail}${extname(file.originalname)}`);
+        },
+      }),
+    }),
+  )
+  create(
+    @Body() createCompanyDto: CreateCompanyDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    return this.companyService.create(createCompanyDto, file.filename);
   }
 
   @Get()

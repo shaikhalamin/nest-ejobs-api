@@ -1,6 +1,6 @@
 import { BaseEntity } from '@/common/entity/base.entity';
 import { JobCircular } from '@/jobs-circular/entities/job-circular.entity';
-import { Column, Entity, OneToOne } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity('companies')
 export class Company extends BaseEntity {
@@ -10,7 +10,7 @@ export class Company extends BaseEntity {
   @Column({ nullable: false, length: 30 })
   companyEmail: string;
 
-  @Column({ nullable: true, length: 30 })
+  @Column({ nullable: true, length: 255 })
   companyLogo: string;
 
   @Column({ nullable: true, length: 30 })
@@ -43,6 +43,6 @@ export class Company extends BaseEntity {
   @Column({ nullable: true, length: 50 })
   companyCountry: string;
 
-  @OneToOne(() => JobCircular, (jobCircular) => jobCircular.company)
+  @OneToMany(() => JobCircular, (jobCircular) => jobCircular.company)
   jobCircular: JobCircular;
 }

@@ -7,8 +7,8 @@ import { UpdateCompanyDto } from './dto/update-company.dto';
 @Injectable()
 export class CompanyService {
   constructor(private readonly companyRepository: CompanyRepository) { }
-  create(createCompanyDto: CreateCompanyDto) {
-    return this.companyRepository.addCompany(createCompanyDto);
+  create(createCompanyDto: CreateCompanyDto, companyLogo: string) {
+    return this.companyRepository.addCompany(createCompanyDto, companyLogo);
   }
 
   findAll() {
