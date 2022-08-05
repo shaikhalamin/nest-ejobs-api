@@ -33,6 +33,10 @@ const driverType = 'mysql';
       entities: [`${__dirname}/**/entities/*.{ts,js}`],
       synchronize: true,
       namingStrategy: new SnakeNamingStrategy(),
+      charset: 'utf8mb4_unicode_ci',
+      extra: {
+        charset: 'utf8mb4_unicode_ci',
+      },
     }),
     ScheduleModule.forRoot(),
     JobsCircularModule,

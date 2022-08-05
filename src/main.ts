@@ -4,6 +4,7 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import * as path from 'path';
 import { AppModule } from './app.module';
+import { seedData } from './seeder/data.seeder';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -27,8 +28,8 @@ async function bootstrap() {
   // });
 
   // await app.startAllMicroservices();
-
   await app.listen(3000);
+  await seedData();
   Logger.log('Application is running on: 3000', 'Bootstrap');
 }
 bootstrap();

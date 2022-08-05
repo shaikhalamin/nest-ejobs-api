@@ -8,7 +8,8 @@ import { JobCircular } from './entities/job-circular.entity';
 export class JobsCircularRepository extends Repository<JobCircular> {
     async addJobCircular(jobsCircularDto: CreateJobsCircularDto) {
         try {
-            const jobCircular = Object.assign(new JobCircular(), jobsCircularDto);
+            const jobCircular = Object.assign(new JobCircular(), jobsCircularDto) as JobCircular;
+            //jobCircular.jobCircularJobLocations = jobsCircularDto.jobLocations
             return await this.save(jobCircular);
         } catch (error) {
             throw new BadRequestException(error.message);

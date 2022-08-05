@@ -8,6 +8,7 @@ import {
   Delete,
   UsePipes,
   ValidationPipe,
+  Query,
 } from '@nestjs/common';
 import { JobsCircularService } from './jobs-circular.service';
 import { CreateJobsCircularDto } from './dto/create-jobs-circular.dto';
@@ -24,8 +25,8 @@ export class JobsCircularController {
   }
 
   @Get()
-  findAll() {
-    return this.jobsCircularService.findAll();
+  findAll(@Query() request) {
+    return this.jobsCircularService.findAll(request);
   }
 
   @Get(':id')
