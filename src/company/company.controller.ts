@@ -28,7 +28,7 @@ export class CompanyController {
   @UseInterceptors(
     FileInterceptor('companyLogo', {
       storage: diskStorage({
-        destination: './public/uploads',
+        destination: './public/uploads/companies',
         filename: async (req: any, file: Express.Multer.File, cb: any) => {
           const companyEmail = new String(
             req.body.companyEmail,

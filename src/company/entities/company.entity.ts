@@ -4,10 +4,10 @@ import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity('companies')
 export class Company extends BaseEntity {
-  @Column({ nullable: false, length: 30 })
+  @Column({ nullable: false, length: 255 })
   companyName: string;
 
-  @Column({ nullable: false, length: 30 })
+  @Column({ nullable: false, length: 255 })
   companyEmail: string;
 
   @Column({ nullable: true, length: 255 })
@@ -16,16 +16,16 @@ export class Company extends BaseEntity {
   @Column({ nullable: true, length: 30 })
   companyType: string;
 
-  @Column({ nullable: false, length: 20 })
+  @Column({ nullable: false, length: 50 })
   companyMobile: string;
 
-  @Column({ nullable: true, length: 20 })
+  @Column({ nullable: true, length: 50 })
   companyTelephone: string;
 
-  @Column({ nullable: true, length: 20 })
+  @Column({ nullable: true, length: 50 })
   companyFax: string;
 
-  @Column({ nullable: true, length: 150 })
+  @Column({ nullable: true, length: 255 })
   companyUrl: string;
 
   @Column({ nullable: true })
@@ -37,10 +37,10 @@ export class Company extends BaseEntity {
   @Column({ nullable: false, type: 'text' })
   companyAddress: string;
 
-  @Column({ nullable: true, length: 50 })
+  @Column({ nullable: true, length: 255 })
   companyCity: string;
 
-  @Column({ nullable: true, length: 50 })
+  @Column({ nullable: true, length: 100 })
   companyCountry: string;
 
   @OneToMany(() => JobCircular, (jobCircular) => jobCircular.company)

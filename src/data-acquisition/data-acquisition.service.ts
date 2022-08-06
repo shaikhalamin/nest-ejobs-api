@@ -28,21 +28,21 @@ export class DataAcquisitionService {
       //   url: item.querySelector('a').href,
       // }));
 
-      // const eachJobListNorm = Array.from(
-      //   document.querySelectorAll('.norm-jobs-wrapper div.job-title-text'),
-      // ).map((item: HTMLElement) => ({
-      //   job: item.innerText,
-      //   url: item.querySelector('a').href,
-      // }));
+      const eachJobListNorm = Array.from(
+        document.querySelectorAll('.norm-jobs-wrapper div.job-title-text'),
+      ).map((item: HTMLElement) => ({
+        job: item.innerText,
+        url: item.querySelector('a').href,
+      }));
 
       //Array.from(document.querySelectorAll('.norm-jobs-wrapper div.job-title-text'),).map((item: HTMLElement) => ({job: item.innerText,url: item.querySelector('a').href}));
 
-      // const eachJobListSout = Array.from(
-      //   document.querySelectorAll('.sout-jobs-wrapper div.job-title-text'),
-      // ).map((item: HTMLElement) => ({
-      //   job: item.innerText,
-      //   url: item.querySelector('a').href,
-      // }));
+      const eachJobListSout = Array.from(
+        document.querySelectorAll('.sout-jobs-wrapper div.job-title-text'),
+      ).map((item: HTMLElement) => ({
+        job: item.innerText,
+        url: item.querySelector('a').href,
+      }));
 
       //working data fetching code from ejobs
 

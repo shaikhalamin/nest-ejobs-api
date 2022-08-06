@@ -4,10 +4,10 @@ import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity('job_industries')
 export class JobIndustry extends BaseEntity {
-  @Column({ nullable: false, length: 30 })
+  @Column({ nullable: false, length: 50 })
   title: string;
 
-  @Column({ nullable: false, length: 30 })
+  @Column({ nullable: false, length: 50 })
   alias: string;
 
   @OneToMany(() => JobCircular, (jobCircular) => jobCircular.jobIndustry)
