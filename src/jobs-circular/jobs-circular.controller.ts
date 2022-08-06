@@ -28,7 +28,7 @@ export class JobsCircularController {
   @Get()
   @UsePipes(new ValidationPipe({ transform: true }))
   findAll(@Query() request: QueryFilterJobsCircularDto) {
-    console.log(request);
+    //console.log(request);
     return this.jobsCircularService.findAll(request);
   }
 
