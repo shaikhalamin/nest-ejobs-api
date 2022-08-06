@@ -13,7 +13,14 @@ export class JobsCircularService {
 
   async findAll(request: any) {
     try {
-      const { page = 1, per_page = 10, filters = {}, order = 'ASC' } = request;
+      let { page = 1, per_page = 10, order = 'ASC', filters = {} } = request;
+      // we need to use query dto to do validation
+      if (!page) {
+        page = 1;
+      }
+      if (!per_page || per_page > 100) {
+        per_page = 10;
+      }
       const [results, total] = await this.jobCircularRepository.findAndCount({
         join: {
           alias: 'job_circulars',
