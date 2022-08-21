@@ -50,6 +50,15 @@ export class JobCircular extends BaseEntity {
   @Column({ nullable: true, type: 'text' })
   experienceRequirements: string;
 
+  @Column({ nullable: true, type: 'tinyint' })
+  experienceLevelFrom: number;
+
+  @Column({ nullable: true, type: 'tinyint' })
+  experienceLevelTo: number;
+
+  @Column({ nullable: true, type: 'tinyint' })
+  experienceLevelMinimum: number;
+
   @Column({ nullable: true, type: 'text' })
   additionalRequirements: string;
 
