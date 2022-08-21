@@ -48,6 +48,9 @@ const createJobCirculars = async () => {
             jobCircular.country = 'Bangaldesh';
             jobCircular.status = 'draft';
             jobCircular.salary = new String(rand(30000, 50000)).toLocaleLowerCase();
+            jobCircular.experienceLevelFrom = rand(0, 3);
+            jobCircular.experienceLevelTo = rand(3, 8);
+            jobCircular.experienceLevelMinimum = rand(2, 3);
             jobCircular.employmentType = await getEmploymentType(rand(1, 4));
             jobCircular.jobLevel = await getJobLevel(rand(1, 4));
             jobCircular.company = await getCompany(rand(1, 15));
@@ -239,6 +242,7 @@ const createJobIndustries = async () => {
         Logger.log(`Total ${newjobIndustryCount} jobIndustry inserted .`)
     }
 }
+
 
 const createJobLevel = async () => {
     const jobLevelList = [
